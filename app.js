@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const Sauce = require("./models/sauce");
 const saucesRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
+// Add Cors
+const cors = require('cors');
 const path = require("path");
 // Add configuration file
 const config = require('./config');
@@ -35,18 +37,19 @@ mongoose
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Add CORS in the headers
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, append, delete, entries, foreach, get, has, keys, set, values"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
+app.use(cors());
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, append, delete, entries, foreach, get, has, keys, set, values"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+//   );
+//   next();
+// });
 
 app.use(bodyParser.json());
 
