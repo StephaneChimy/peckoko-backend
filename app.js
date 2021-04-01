@@ -51,7 +51,13 @@ app.use(cors());
 //   next();
 // });
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json()); // Deprecated
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 // Data Sanitization against NoSQL Injection Attacks
 app.use(mongoSanitize());
